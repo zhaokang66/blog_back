@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.karmai</groupId>
     <artifactId>blog_back</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>blog_back</name>
     <description>blog_back</description>
     <properties>
