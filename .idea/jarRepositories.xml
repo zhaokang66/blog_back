@@ -12,19 +12,9 @@
       <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="jc-repo" />
-      <option name="name" value="jc-repo" />
-      <option name="url" value="http://10.110.86.190:8081/repository/jc-repo/" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="jc-snapshot" />
-      <option name="name" value="jc-snapshot" />
-      <option name="url" value="http://10.110.86.190:8081/repository/jc-snapshot/" />
     </remote-repository>
   </component>
 </project>

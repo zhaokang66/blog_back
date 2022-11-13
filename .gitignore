@@ -1,39 +1,33 @@
-/.gitignore
-*.DS_Store
-Thumbs.db
-*.sw?
-.#*
-*#
-*~
-*.sublime-*
-# Build Artifacts
-.gradle/
-build/
+HELP.md
 target/
-bin/
-dependency-reduced-pom.xml
-# Eclipse Project Files
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
 .classpath
+.factorypath
 .project
 .settings
-#other
-doc/
-# IntelliJ IDEA Files
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
 *.iml
 *.ipr
-*.iws
-*.idea
-**/*.iml
-**/*.ipr
-**/*.iws
-**/*.idea
-*.class
-**/*.class
-*.prefs
-*.MF
-*.core.xml
-**/*.prefs
-**/*.MF
-**/*.core.xml
-org.eclipse*
-**/org.eclipse*
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
