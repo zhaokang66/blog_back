@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
  * @author yezhiqiu
  * @date 2021/08/14
  */
-@MapperScan("com.karmai.blog.dao")
+@MapperScan("com.karmai.blog.mapper")
 @SpringBootApplication
 @EnableScheduling
 public class BlogApplication {

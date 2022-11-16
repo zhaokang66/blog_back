@@ -2,9 +2,8 @@ package com.karmai.blog.handler;
 
 import cn.hutool.json.JSONUtil;
 import com.karmai.blog.entity.Result;
-import com.karmai.blog.entity.UserInfo;
+import com.karmai.blog.entity.SysUser;
 import com.karmai.blog.utils.JwtUtil;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -15,6 +14,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,13 +32,16 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         httpServletResponse.setContentType("application/json");
+        ServletOutputStream outStream = httpServletResponse.getOutputStream();
         String userId = "31D5B52C-9743-4144-9F4D-AABC0EB60FA7";
         Map<String,Object> loginData = new HashMap<>();
         loginData.put("token",JwtUtil.genToken(userId));
-        UserInfo userInfo = new UserInfo();
-        userInfo.setName("测试用户");
-        loginData.put("userInfo",userInfo);
-        httpServletResponse.getWriter().write(JSONUtil.toJsonStr(Result.ok(loginData)));
+        SysUser sysUserInfo = new SysUser();
+        sysUserInfo.setUsername("测试用户");
+        loginData.put("userInfo", sysUserInfo);
+        outStream.write(JSONUtil.toJsonStr(Result.ok(loginData)).getBytes(StandardCharsets.UTF_8));
+        outStream.flush();
+        outStream.close();
     }
 
 

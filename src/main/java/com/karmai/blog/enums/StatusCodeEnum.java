@@ -37,8 +37,12 @@ public enum StatusCodeEnum {
     /**
      * 用户名不存在
      */
-    USERNAME_NOT_EXIST(52002, "用户名不存在");
+    USERNAME_NOT_EXIST(52002, "用户名不存在"),
 
+    /**
+     * 密码错误
+     */
+    PASSWORD_ERROR(52003, "密码错误");
 
     /**
      * 状态码
