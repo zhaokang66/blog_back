@@ -1,5 +1,6 @@
 package com.karmai.blog.config;
 
+import com.karmai.blog.handler.JwtAuthnticationFilter;
 import com.karmai.blog.handler.LoginFailureHander;
 import com.karmai.blog.handler.LoginSuccessHandler;
 import com.karmai.blog.handler.LogoutSuccessHandlerImpl;
@@ -27,6 +28,11 @@ public class  WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/test/**",
             "/image/**",
     };
+    @Bean
+    JwtAuthnticationFilter jwtAuthnticationFilter() throws Exception {
+        JwtAuthnticationFilter jwtAuthnticationFilter = new JwtAuthnticationFilter(authenticationManager());
+        return jwtAuthnticationFilter;
+    }
     @Autowired
     private LoginSuccessHandler loginSuccessHandler;
     @Autowired
@@ -70,9 +76,13 @@ public class  WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(URL_WHITELIST).permitAll()//白名单
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
         //异常处理
-        //z自定义过滤器配置
+        //自定义过滤器配置
+                .and()
+                .addFilter(jwtAuthnticationFilter());
+
+
 
         // 配置登录注销路径
 //        http.formLogin()

@@ -33,12 +33,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         httpServletResponse.setContentType("application/json");
         ServletOutputStream outStream = httpServletResponse.getOutputStream();
-        String userId = "31D5B52C-9743-4144-9F4D-AABC0EB60FA7";
+        SysUser userInfo = ((SysUser)(authentication.getPrincipal()));
+        String tokenStr = userInfo.getId() + userInfo.getUsername();
         Map<String,Object> loginData = new HashMap<>();
-        loginData.put("token",JwtUtil.genToken(userId));
-        SysUser sysUserInfo = new SysUser();
-        sysUserInfo.setUsername("测试用户");
-        loginData.put("userInfo", sysUserInfo);
+        loginData.put("token",JwtUtil.genToken(tokenStr));
+        loginData.put("userInfo", userInfo);
         outStream.write(JSONUtil.toJsonStr(Result.ok(loginData)).getBytes(StandardCharsets.UTF_8));
         outStream.flush();
         outStream.close();

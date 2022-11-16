@@ -4,6 +4,7 @@ import com.karmai.blog.entity.SysUser;
 import com.karmai.blog.enums.StatusCodeEnum;
 import com.karmai.blog.exception.UserCountLockException;
 import com.karmai.blog.service.UserService;
+import jdk.nashorn.internal.runtime.options.Option;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -29,10 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }else if ("1".equals(sysUser.getStatus())) {
             throw new UserCountLockException("该用户已被停用");
         }
-        return new User(sysUser.getUsername(),sysUser.getPassword(),getUserAuthority());
+        return sysUser;
     }
 
-    private List<GrantedAuthority> getUserAuthority() {
-        return new ArrayList<>();
-    }
 }
