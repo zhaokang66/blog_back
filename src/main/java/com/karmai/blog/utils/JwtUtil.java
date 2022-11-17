@@ -17,7 +17,7 @@ import java.util.Map;
 public class JwtUtil {
     private static final String TOKEN_SECRET = "F3935E69-BD8B-4D77-AA5D-74B5BD6B4300";
 
-    public static String genToken(String userId) {
+    public static String genToken(String userName) {
         try {
             // 设置过期时间
             Date date = DateUtils.addSeconds(new Date(), 24 * 60 * 60);
@@ -32,7 +32,7 @@ public class JwtUtil {
             return JWT.create()
                     .withHeader(header)
                     .withIssuedAt(new Date())
-                    .withClaim("userId", userId)
+                    .withClaim("userName", userName)
                     .withExpiresAt(date)
                     .sign(algorithm);
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class JwtUtil {
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT jwt = verifier.verify(token);
-            return String.valueOf(jwt.getClaim("userId"));
+            return jwt.getClaim("userName").asString();
         } catch (Exception e) {
             return null;
         }

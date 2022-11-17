@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @description 针对表【user】的数据库操作Service
 * @createDate 2022-11-15 23:57:16
 */
-public interface UserService extends IService<SysUser> {
+public interface SysUserService extends IService<SysUser> {
 
     SysUser getByUserName(String userName);
 }

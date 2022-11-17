@@ -3,28 +3,21 @@ package com.karmai.blog.service.impl;
 import com.karmai.blog.entity.SysUser;
 import com.karmai.blog.enums.StatusCodeEnum;
 import com.karmai.blog.exception.UserCountLockException;
-import com.karmai.blog.service.UserService;
-import jdk.nashorn.internal.runtime.options.Option;
+import com.karmai.blog.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    UserService userService;
+    SysUserService sysUserService;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        SysUser sysUser = userService.getByUserName(userName);
+        SysUser sysUser = sysUserService.getByUserName(userName);
         if (sysUser == null) {
             throw new UsernameNotFoundException(StatusCodeEnum.USERNAME_NOT_EXIST.getDesc());
         }else if ("1".equals(sysUser.getStatus())) {

@@ -25,7 +25,6 @@ public class  WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] URL_WHITELIST = {
             "/login",
             "/logout",
-            "/test/**",
             "/image/**",
     };
     @Bean
@@ -68,7 +67,7 @@ public class  WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessHandler(logoutSuccessHandler)
-        //session禁用
+                //session禁用
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //无状态

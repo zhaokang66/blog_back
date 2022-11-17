@@ -34,9 +34,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         httpServletResponse.setContentType("application/json");
         ServletOutputStream outStream = httpServletResponse.getOutputStream();
         SysUser userInfo = ((SysUser)(authentication.getPrincipal()));
-        String tokenStr = userInfo.getId() + userInfo.getUsername();
+        String userName = userInfo.getUsername();
         Map<String,Object> loginData = new HashMap<>();
-        loginData.put("token",JwtUtil.genToken(tokenStr));
+        loginData.put("token",JwtUtil.genToken(userName));
         loginData.put("userInfo", userInfo);
         outStream.write(JSONUtil.toJsonStr(Result.ok(loginData)).getBytes(StandardCharsets.UTF_8));
         outStream.flush();

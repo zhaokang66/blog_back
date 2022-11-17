@@ -2,7 +2,7 @@ package com.karmai.blog.controller;
 
 import com.karmai.blog.entity.Result;
 import com.karmai.blog.entity.SysUser;
-import com.karmai.blog.service.UserService;
+import com.karmai.blog.service.SysUserService;
 import com.karmai.blog.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +19,11 @@ import java.util.List;
 public class  UserAuthController {
 
     @Autowired
-    private UserService userService;
+    private SysUserService sysUserService;
 
     @RequestMapping("/user/list")
     public Result<List<SysUser>> getUserList() {
-        List<SysUser> sysUserList = userService.list();
+        List<SysUser> sysUserList = sysUserService.list();
         return Result.ok(sysUserList);
     }
     @RequestMapping("/user/login")
