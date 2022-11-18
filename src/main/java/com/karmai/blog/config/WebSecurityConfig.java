@@ -50,23 +50,11 @@ public class  WebSecurityConfig extends WebSecurityConfigurerAdapter {
             auth.userDetailsService(userDetailsService);
     }
 
-    @Bean
-    CorsConfigurationSource configurationSource(){
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
-        corsConfiguration.setAllowedMethods(Arrays.asList("*"));
-        corsConfiguration.setAllowedOrigins(Arrays.asList("*"));
-        corsConfiguration.setMaxAge(3600l);
-        UrlBasedCorsConfigurationSource configurationSource = new UrlBasedCorsConfigurationSource();
-        configurationSource.registerCorsConfiguration("/**",corsConfiguration);
-        return configurationSource;
-    }
     @Override
     public void configure(HttpSecurity http) throws Exception {
         //开启跨域、csr攻击、 关闭
         http
                 .cors()
-                .configurationSource(configurationSource())
                 .and()
                 .csrf()
                 .disable()
