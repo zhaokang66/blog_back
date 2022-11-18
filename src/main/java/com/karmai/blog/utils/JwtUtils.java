@@ -14,7 +14,7 @@ import java.util.Map;
  * @Author zhaokang03
  * @Date 2022/11/15 13:16
  */
-public class JwtUtil {
+public class JwtUtils {
     private static final String TOKEN_SECRET = "F3935E69-BD8B-4D77-AA5D-74B5BD6B4300";
 
     public static String genToken(String userName) {
@@ -47,13 +47,9 @@ public class JwtUtil {
      * @return
      */
     public static String verify(String token) {
-        try {
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT jwt = verifier.verify(token);
             return jwt.getClaim("userName").asString();
-        } catch (Exception e) {
-            return null;
-        }
     }
 }

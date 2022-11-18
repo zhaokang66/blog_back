@@ -3,7 +3,7 @@ package com.karmai.blog.handler;
 import cn.hutool.json.JSONUtil;
 import com.karmai.blog.entity.Result;
 import com.karmai.blog.entity.SysUser;
-import com.karmai.blog.utils.JwtUtil;
+import com.karmai.blog.utils.JwtUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -36,7 +36,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         SysUser userInfo = ((SysUser)(authentication.getPrincipal()));
         String userName = userInfo.getUsername();
         Map<String,Object> loginData = new HashMap<>();
-        loginData.put("token",JwtUtil.genToken(userName));
+        loginData.put("token", JwtUtils.genToken(userName));
         loginData.put("userInfo", userInfo);
         outStream.write(JSONUtil.toJsonStr(Result.ok(loginData)).getBytes(StandardCharsets.UTF_8));
         outStream.flush();
