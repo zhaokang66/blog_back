@@ -2,6 +2,7 @@ package com.karmai.blog.mapper;
 
 import com.karmai.blog.entity.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
 * @author karmai
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2022-11-15 23:57:16
 * @Entity com.karmai.blog.entity.SysUser
 */
+@Repository
 public interface UserMapper extends BaseMapper<SysUser> {
 
 }

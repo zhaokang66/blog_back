@@ -1,15 +1,18 @@
 package com.karmai.blog.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Collection;
 import java.util.Date;
+
+import com.karmai.blog.annotation.PhoneValid;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  * 
@@ -27,12 +30,22 @@ public class SysUser implements UserDetails {
     /**
      * 
      */
+    @NotBlank(message = "用户名不能为空")
     @TableField(value = "username")
     private String username;
 
     /**
+     *
+     */
+    @NotBlank(message = "昵称不能为空")
+    @TableField(value = "nickName")
+    private String nickName;
+
+    /**
      * 
      */
+    @NotBlank(message = "邮箱不能为空")
+    @Email(message = "邮箱格式不正确")
     @TableField(value = "email")
     private String email;
 
@@ -45,14 +58,26 @@ public class SysUser implements UserDetails {
     /**
      * 
      */
-    @TableField(value = "create_time")
-    private Date createTime;
+    @TableField(value = "created_on",fill = FieldFill.INSERT)
+    private Date created_on;
 
     /**
      * 
      */
-    @TableField(value = "update_time")
-    private Date updateTime;
+    @TableField(value = "lastChanged_on",fill = FieldFill.INSERT_UPDATE)
+    private Date lastChanged_on;
+
+    /**
+     *
+     */
+    @TableField(value = "created_by",fill = FieldFill.INSERT)
+    private String created_by;
+
+    /**
+     *
+     */
+    @TableField(value = "lastChanged_by",fill = FieldFill.INSERT_UPDATE)
+    private String lastChanged_by;
 
     /**
      * 
@@ -75,12 +100,15 @@ public class SysUser implements UserDetails {
     /**
      * 
      */
+    @PhoneValid
     @TableField(value = "phoneNumber")
-    private String phonenumber;
+    private String phoneNumber;
 
     /**
      * 
      */
+    @Size(min = 6, message = "密码不能少于6位")
+    @NotBlank(message = "密码不能为空")
     @TableField(value = "password")
     private String password;
 

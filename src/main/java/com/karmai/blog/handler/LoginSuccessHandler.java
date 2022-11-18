@@ -34,6 +34,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         httpServletResponse.setContentType("application/json");
         ServletOutputStream outStream = httpServletResponse.getOutputStream();
         SysUser userInfo = ((SysUser)(authentication.getPrincipal()));
+        //todo  登录成功需更新loginTime字段
         String userName = userInfo.getUsername();
         Map<String,Object> loginData = new HashMap<>();
         loginData.put("token", JwtUtils.genToken(userName));

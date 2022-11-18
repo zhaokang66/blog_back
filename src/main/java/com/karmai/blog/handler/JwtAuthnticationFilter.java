@@ -51,8 +51,9 @@ public class JwtAuthnticationFilter extends BasicAuthenticationFilter {
         }
         try{
             String userName = JwtUtils.verify(token);
+            //todo 此处查找用户信息应该从redis中取
             SysUser user = sysUserService.getByUserName(userName);
-            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userName,null,sysSysUserService.getUserAuthortity(user.getId()));
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(user,null,sysSysUserService.getUserAuthortity(user.getId()));
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             chain.doFilter(request,response);
         }
