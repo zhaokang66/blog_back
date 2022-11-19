@@ -24,7 +24,7 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         httpServletResponse.setContentType("applcation/json");
         ServletOutputStream outStream = httpServletResponse.getOutputStream();
-        outStream.write(JSONUtil.toJsonStr(Result.ok()).getBytes(StandardCharsets.UTF_8));
+        outStream.write(JSONUtil.toJsonStr(Result.ok("注销成功!")).getBytes(StandardCharsets.UTF_8));
         outStream.flush();
         outStream.close();
     }
