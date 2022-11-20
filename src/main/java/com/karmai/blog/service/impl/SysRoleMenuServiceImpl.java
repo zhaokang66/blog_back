@@ -1,10 +1,14 @@
 package com.karmai.blog.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.karmai.blog.entity.SysMenu;
 import com.karmai.blog.entity.SysRoleMenu;
 import com.karmai.blog.service.SysRoleMenuService;
 import com.karmai.blog.mapper.SysRoleMenuMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
 * @author karmai
@@ -14,7 +18,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRoleMenu>
     implements SysRoleMenuService{
-
 }
 
 

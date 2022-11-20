@@ -5,7 +5,10 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -44,6 +47,9 @@ public class SysMenu extends BaseEntity implements Serializable {
      */
     @TableField(value = "path")
     private String path;
+
+    @TableField(exist = false)
+    private List<SysMenu> children=new ArrayList<>();
 
     /**
      * 组件路径
