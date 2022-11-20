@@ -13,4 +13,6 @@ public interface SysUserService extends IService<SysUser> {
     SysUser getByUserName(String userName);
 
     void register(SysUser user);
+
+    String getUserAuthorityInfo(Long userId);
 }

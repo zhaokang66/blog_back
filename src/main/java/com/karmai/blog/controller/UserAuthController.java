@@ -5,6 +5,7 @@ import com.karmai.blog.entity.SysUser;
 import com.karmai.blog.service.SysUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ public class  UserAuthController {
     private SysUserService sysUserService;
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_common')")
     public Result<List<SysUser>> getUserList() {
         List<SysUser> sysUserList = sysUserService.list();
         return Result.ok(sysUserList);

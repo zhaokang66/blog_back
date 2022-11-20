@@ -8,6 +8,7 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.karmai.blog.entity.SysUser;
 import com.karmai.blog.service.SysUserService;
 import com.karmai.blog.service.impl.SysSysUserServiceImpl;
+import com.karmai.blog.service.impl.UserDetailsServiceImpl;
 import com.karmai.blog.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -28,10 +29,9 @@ import java.util.Arrays;
 @Slf4j
 public class JwtAuthnticationFilter extends BasicAuthenticationFilter {
     @Autowired
-    private SysSysUserServiceImpl sysSysUserService;
-
-    @Autowired
     private SysUserService sysUserService;
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
     private static final String[] URL_WHITELIST = {
             "/login",
             "/logout",
@@ -53,7 +53,7 @@ public class JwtAuthnticationFilter extends BasicAuthenticationFilter {
             String userName = JwtUtils.verify(token);
             //todo 此处查找用户信息应该从redis中取
             SysUser user = sysUserService.getByUserName(userName);
-            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(user,null,sysSysUserService.getUserAuthortity(user.getId()));
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(user,null,userDetailsService.getUserAuthortity(user.getId()));
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             chain.doFilter(request,response);
         }

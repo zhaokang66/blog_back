@@ -4,7 +4,11 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.karmai.blog.annotation.PhoneValid;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,15 +22,10 @@ import javax.validation.constraints.Size;
  * 
  * @TableName user
  */
-@TableName(value ="user")
+@TableName(value ="sys_user")
 @Data
-public class SysUser implements UserDetails {
-    /**
-     * 
-     */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
-
+public class SysUser extends BaseEntity implements UserDetails {
+    
     /**
      * 
      */
@@ -37,7 +36,6 @@ public class SysUser implements UserDetails {
     /**
      *
      */
-    @NotBlank(message = "昵称不能为空")
     @TableField(value = "nickName")
     private String nickName;
 
@@ -58,42 +56,14 @@ public class SysUser implements UserDetails {
     /**
      * 
      */
-    @TableField(value = "created_on",fill = FieldFill.INSERT)
-    private Date created_on;
-
-    /**
-     * 
-     */
-    @TableField(value = "lastChanged_on",fill = FieldFill.INSERT_UPDATE)
-    private Date lastChanged_on;
-
-    /**
-     *
-     */
-    @TableField(value = "created_by",fill = FieldFill.INSERT)
-    private String created_by;
-
-    /**
-     *
-     */
-    @TableField(value = "lastChanged_by",fill = FieldFill.INSERT_UPDATE)
-    private String lastChanged_by;
-
-    /**
-     * 
-     */
-    @TableField(value = "remark")
-    private String remark;
-
-    /**
-     * 
-     */
     @TableField(value = "avatar")
     private String avatar;
 
     /**
      * 
      */
+    @JsonSerialize(using=CustomDateTimeSerializer.class)
+    @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss")
     @TableField(value = "login_time")
     private Date loginTime;
 
@@ -103,7 +73,6 @@ public class SysUser implements UserDetails {
     @PhoneValid
     @TableField(value = "phoneNumber")
     private String phoneNumber;
-
     /**
      * 
      */

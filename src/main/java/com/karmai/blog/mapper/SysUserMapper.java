@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 * @Entity com.karmai.blog.entity.SysUser
 */
 @Repository
-public interface UserMapper extends BaseMapper<SysUser> {
+public interface SysUserMapper extends BaseMapper<SysUser> {
 
 }
 
