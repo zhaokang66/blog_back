@@ -55,20 +55,20 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         String userName = userInfo.getUsername();
         sysUserService.update(
                 new UpdateWrapper<SysUser>()
-                        .set("login_time",new Date())
-                        .eq("username",userName)
+                        .set("login_time", new Date())
+                        .eq("username", userName)
         );
         List<SysRole> roleList = sysRoleService.list(new QueryWrapper<SysRole>().inSql("id", "SELECT role_id FROM sys_user_role WHERE user_id=" + userInfo.getId()));
         // 遍历角色，获取所有菜单权限
-         Set<SysMenu> menuSet=new HashSet<SysMenu>();
-         for(SysRole sysRole:roleList){
-             List<SysMenu> sysMenuList = sysMenuService.list(new QueryWrapper<SysMenu>().inSql("id", "SELECT menu_id FROM sys_role_menu WHERE role_id=" + sysRole.getId()));
-             menuSet.addAll(sysMenuList);
-         }
-         List<SysMenu> sysMenuList=new ArrayList<>(menuSet);
+        Set<SysMenu> menuSet = new HashSet<SysMenu>();
+        for (SysRole sysRole : roleList) {
+            List<SysMenu> sysMenuList = sysMenuService.list(new QueryWrapper<SysMenu>().inSql("id", "SELECT menu_id FROM sys_role_menu WHERE role_id=" + sysRole.getId()));
+            menuSet.addAll(sysMenuList);
+        }
+        List<SysMenu> sysMenuList = new ArrayList<>(menuSet);
         sysMenuList.sort(Comparator.comparing(SysMenu::getOrderNum));
-        List<SysMenu> menuList=sysMenuService.buildTreeMenu(sysMenuList);
-        Map<String,Object> loginData = new HashMap<>();
+        List<SysMenu> menuList = sysMenuService.buildTreeMenu(sysMenuList);
+        Map<String, Object> loginData = new HashMap<>();
         loginData.put("token", JwtUtils.genToken(userName));
         loginData.put("userInfo", userInfo);
         loginData.put("menuList", menuList);
