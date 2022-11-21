@@ -63,16 +63,15 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
          Set<SysMenu> menuSet=new HashSet<SysMenu>();
          for(SysRole sysRole:roleList){
              List<SysMenu> sysMenuList = sysMenuService.list(new QueryWrapper<SysMenu>().inSql("id", "SELECT menu_id FROM sys_role_menu WHERE role_id=" + sysRole.getId()));
-             for(SysMenu sysMenu:sysMenuList){
-                 menuSet.add(sysMenu);
-             }
+             menuSet.addAll(sysMenuList);
          }
          List<SysMenu> sysMenuList=new ArrayList<>(menuSet);
-        sysMenuList.sort(Comparator.comparing(SysMenu::getOrderNum)); List<SysMenu> menuList=sysMenuService.buildTreeMenu(sysMenuList);
+        sysMenuList.sort(Comparator.comparing(SysMenu::getOrderNum));
+        List<SysMenu> menuList=sysMenuService.buildTreeMenu(sysMenuList);
         Map<String,Object> loginData = new HashMap<>();
         loginData.put("token", JwtUtils.genToken(userName));
         loginData.put("userInfo", userInfo);
-        loginData.put("menuList", sysMenuList);
+        loginData.put("menuList", menuList);
         outStream.write(JSONUtil.toJsonStr(Result.ok(loginData)).getBytes(StandardCharsets.UTF_8));
         outStream.flush();
         outStream.close();
