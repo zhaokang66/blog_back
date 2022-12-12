@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @Author zhaokang03
@@ -65,6 +66,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
             List<SysMenu> sysMenuList = sysMenuService.list(new QueryWrapper<SysMenu>().inSql("id", "SELECT menu_id FROM sys_role_menu WHERE role_id=" + sysRole.getId()));
             menuSet.addAll(sysMenuList);
         }
+        userInfo.setRoles(roleList.stream().map(SysRole::getName).collect(Collectors.joining(",")));
         List<SysMenu> sysMenuList = new ArrayList<>(menuSet);
         sysMenuList.sort(Comparator.comparing(SysMenu::getOrderNum));
         List<SysMenu> menuList = sysMenuService.buildTreeMenu(sysMenuList);

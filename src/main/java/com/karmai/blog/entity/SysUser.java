@@ -34,6 +34,12 @@ public class SysUser extends BaseEntity implements UserDetails {
     private String username;
 
     /**
+     * 所属角色
+     */
+    @TableField(exist = false)
+    private String roles;
+
+    /**
      *
      */
     @TableField(value = "nickName")

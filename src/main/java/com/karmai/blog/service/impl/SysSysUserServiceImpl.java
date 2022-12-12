@@ -61,7 +61,7 @@ public class SysSysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
 
     @Override
     public String getUserAuthorityInfo(Long userId) {
-        StringBuffer authority=new StringBuffer(); // 根据用户id获取所有的角色
+        StringBuilder authority=new StringBuilder(); // 根据用户id获取所有的角色
          List<SysRole> roleList = sysRoleMapper.selectList(new QueryWrapper<SysRole> ().inSql("id", "SELECT role_id FROM sys_user_role WHERE user_id=" + userId));
          if(roleList.size()>0){
              String roleCodeStrs = roleList.stream().map(r -> "ROLE_" + r.getCode()).collect(Collectors.joining(","));
@@ -78,7 +78,7 @@ public class SysSysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
              } }
          if(menuCodeSet.size()>0){
              authority.append(",");
-             String menuCodeStrs = menuCodeSet.stream().collect(Collectors.joining(","));
+             String menuCodeStrs = String.join(",", menuCodeSet);
              authority.append(menuCodeStrs);
          }
          System.out.println("authority:"+authority.toString());
