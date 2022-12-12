@@ -14,7 +14,7 @@ import java.lang.annotation.*;
     @Constraint(
             validatedBy = {PhoneNumberConstraintValidator.class}
     )
-// 注解可以放在xx上
+    // 注解可以放在xx上
     @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
     @Retention(RetentionPolicy.RUNTIME)
     public @interface PhoneValid {

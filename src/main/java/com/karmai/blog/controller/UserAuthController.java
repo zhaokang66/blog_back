@@ -6,6 +6,7 @@ import com.karmai.blog.service.SysUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,7 +24,8 @@ public class  UserAuthController {
     private SysUserService sysUserService;
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    @PreAuthorize("hasRole('ROLE_common')")
+//    @PreAuthorize("hasRole('ROLE_common')")
+    @PreAuthorize("hasAuthority('system:user:query')")
     public Result<List<SysUser>> getUserList() {
         List<SysUser> sysUserList = sysUserService.list();
         return Result.ok(sysUserList);
@@ -36,5 +38,20 @@ public class  UserAuthController {
         return Result.ok();
     }
 
+    /**
+     * 修改密码
+     */
+    @RequestMapping(value = "/updateUserPwd",method = RequestMethod.POST)
+    @PreAuthorize("hasAuthority('system:user:edit')")
+    public Result<String> updateUserPwd(@RequestBody SysUser user) {
+        SysUser currentUser = sysUserService.getById(user.getId());
+        if (new BCryptPasswordEncoder().matches(user.getOldPassword(),currentUser.getPassword())) {
+            currentUser.setPassword(new BCryptPasswordEncoder().encode(user.getNewPassword()));
+            sysUserService.updateById(currentUser);
+        }else {
+            return Result.fail("输入的旧密码错误！");
+        }
+        return Result.ok();
+    }
 
 }

@@ -87,6 +87,17 @@ public class SysUser extends BaseEntity implements UserDetails {
     @TableField(value = "password")
     private String password;
 
+    /**
+     * 确认新密码
+     */
+    @TableField(exist = false)
+    private String newPassword;
+    /**
+     * 旧密码（前端传来的）
+     */
+    @TableField(exist = false)
+    private String oldPassword;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
