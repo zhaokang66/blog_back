@@ -49,7 +49,6 @@ public class UserRoleController {
     @PreAuthorize("hasAuthority('system:user:role')")
     public Result grantRole(Long userId, @RequestBody Long[] roleIds) {
         // 此处应该加事务管理,默认事务失效的原因：1：类不是public2、数据库不支持事务3、异常没用抛出，被catch了4、异常类型，默认没指定rollbackFor的话，检查异常不触发回滚
-        // 先删除用户角色表中userid的记录
         sysUserRoleService.remove(new QueryWrapper<SysUserRole>().eq("user_id",userId));
         List<SysUserRole> userRoleList = new ArrayList<>();
         Arrays.stream(roleIds).forEach(i -> {
