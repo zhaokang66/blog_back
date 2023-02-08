@@ -9,10 +9,7 @@ import com.karmai.blog.service.SysUserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -32,7 +29,7 @@ public class UserRoleController {
     /**
      * 返回所有角色
      */
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @GetMapping(value = "/list")
     @PreAuthorize("hasAuthority('system:role:query')")
     public Result<Map<String,Object>> list() {
         Map<String,Object> res = new HashMap<>();
@@ -45,7 +42,7 @@ public class UserRoleController {
      * 用户角色授权
      */
     @Transactional(rollbackFor = Exception.class)
-    @RequestMapping(value = "grantRole",method = RequestMethod.POST)
+    @PostMapping(value = "grantRole")
     @PreAuthorize("hasAuthority('system:user:role')")
     public Result grantRole(Long userId, @RequestBody Long[] roleIds) {
         // 此处应该加事务管理,默认事务失效的原因：1：类不是public2、数据库不支持事务3、异常没用抛出，被catch了4、异常类型，默认没指定rollbackFor的话，检查异常不触发回滚

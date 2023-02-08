@@ -23,7 +23,7 @@ public class  UserAuthController {
     @Autowired
     private SysUserService sysUserService;
 
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @GetMapping(value = "/list")
 //    @PreAuthorize("hasRole('ROLE_common')")
     @PreAuthorize("hasAuthority('system:user:query')")
     public Result<List<SysUser>> getUserList() {
@@ -31,7 +31,7 @@ public class  UserAuthController {
         return Result.ok(sysUserList);
     }
 
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    @PostMapping(value = "/register")
     @ResponseBody
     public Result<SysUser> register(@Valid  @RequestBody SysUser user) {
         sysUserService.register(user);
@@ -41,7 +41,7 @@ public class  UserAuthController {
     /**
      * 修改密码
      */
-    @RequestMapping(value = "/updateUserPwd",method = RequestMethod.POST)
+    @PostMapping(value = "/updateUserPwd")
     @PreAuthorize("hasAuthority('system:user:edit')")
     public Result<String> updateUserPwd(@RequestBody SysUser user) {
         SysUser currentUser = sysUserService.getById(user.getId());
@@ -53,5 +53,9 @@ public class  UserAuthController {
         }
         return Result.ok();
     }
+
+    /**
+     *  搜索用户，根据用户昵称或者用户名搜索 eslaticsearch
+     */
 
 }

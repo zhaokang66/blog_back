@@ -47,7 +47,7 @@ spring:
   # es配置 若搜索模式为mysql可删除
   elasticsearch:
     rest:
-      uris: 你的IP:9200
+      uris: 127.0.0.1:9200
   # 邮箱配置
   mail:
     host: smtp.qq.com
@@ -76,7 +76,7 @@ mybatis-plus:
 
 # 搜索模式 可选 elasticsearch或mysql
 search:
-  mode: mysql
+  mode: elasticsearch
 
 
 # 上传模式 可选 oss或local  （http://和最后的/一定不能去！！！）
