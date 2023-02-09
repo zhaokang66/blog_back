@@ -26,9 +26,6 @@ import javax.validation.constraints.Size;
 @TableName(value ="sys_user")
 @Data
 public class SysUser extends BaseEntity implements UserDetails {
-    @TableId
-    private Integer id;
-
     /**
      * 
      */
