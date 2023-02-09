@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.karmai.blog.mapper.SysRoleMenuMapper">
+<mapper namespace="com.karmai.blog.mapper.mysql.SysRoleMenuMapper">
 
-    <resultMap id="BaseResultMap" type="com.karmai.blog.entity.SysRoleMenu">
+    <resultMap id="BaseResultMap" type="com.karmai.blog.entity.mysql.SysRoleMenu">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="roleId" column="role_id" jdbcType="BIGINT"/>
             <result property="menuId" column="menu_id" jdbcType="BIGINT"/>

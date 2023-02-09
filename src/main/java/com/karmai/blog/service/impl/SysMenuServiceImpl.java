@@ -1,9 +1,9 @@
 package com.karmai.blog.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.karmai.blog.entity.SysMenu;
+import com.karmai.blog.entity.mysql.SysMenu;
 import com.karmai.blog.service.SysMenuService;
-import com.karmai.blog.mapper.SysMenuMapper;
+import com.karmai.blog.mapper.mysql.SysMenuMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

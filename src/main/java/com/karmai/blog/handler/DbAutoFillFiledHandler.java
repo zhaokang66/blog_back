@@ -1,13 +1,11 @@
 package com.karmai.blog.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.karmai.blog.entity.SysUser;
+import com.karmai.blog.entity.mysql.SysUser;
 import com.karmai.blog.utils.CommonUtils;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
 
 /**

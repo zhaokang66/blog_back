@@ -1,6 +1,6 @@
 package com.karmai.blog.service;
 
-import com.karmai.blog.entity.SysRoleMenu;
+import com.karmai.blog.entity.mysql.SysRoleMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

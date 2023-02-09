@@ -1,6 +1,6 @@
 package com.karmai.blog.service;
 
-import com.karmai.blog.entity.SysMenu;
+import com.karmai.blog.entity.mysql.SysMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

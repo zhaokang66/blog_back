@@ -1,16 +1,16 @@
-package com.karmai.blog.entity;
+package com.karmai.blog.entity.mysql;
 
 import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.karmai.blog.annotation.PhoneValid;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -22,9 +22,12 @@ import javax.validation.constraints.Size;
  * 
  * @TableName user
  */
+@EqualsAndHashCode(callSuper = true)
 @TableName(value ="sys_user")
 @Data
 public class SysUser extends BaseEntity implements UserDetails {
+    @TableId
+    private Integer id;
 
     /**
      * 

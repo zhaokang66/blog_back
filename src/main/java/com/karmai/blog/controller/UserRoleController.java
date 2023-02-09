@@ -1,9 +1,9 @@
 package com.karmai.blog.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.karmai.blog.entity.Result;
-import com.karmai.blog.entity.SysRole;
-import com.karmai.blog.entity.SysUserRole;
+import com.karmai.blog.entity.mysql.Result;
+import com.karmai.blog.entity.mysql.SysRole;
+import com.karmai.blog.entity.mysql.SysUserRole;
 import com.karmai.blog.service.SysRoleService;
 import com.karmai.blog.service.SysUserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
