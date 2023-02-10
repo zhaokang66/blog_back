@@ -1,6 +1,6 @@
 package com.karmai.blog.exception;
 
-import com.karmai.blog.entity.mysql.Result;
+import com.karmai.blog.entity.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

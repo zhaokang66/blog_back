@@ -1,4 +1,4 @@
-package com.karmai.blog.entity.mysql;
+package com.karmai.blog.entity;
 
 import com.karmai.blog.enums.StatusCodeEnum;
 import lombok.Data;

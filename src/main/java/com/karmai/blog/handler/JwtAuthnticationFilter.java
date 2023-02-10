@@ -5,7 +5,7 @@ import com.auth0.jwt.exceptions.AlgorithmMismatchException;
 import com.auth0.jwt.exceptions.InvalidClaimException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
-import com.karmai.blog.entity.mysql.SysUser;
+import com.karmai.blog.entity.SysUser;
 import com.karmai.blog.service.SysUserService;
 import com.karmai.blog.service.impl.UserDetailsServiceImpl;
 import com.karmai.blog.utils.JwtUtils;

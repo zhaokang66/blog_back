@@ -1,7 +1,7 @@
 package com.karmai.blog.handler;
 
 import cn.hutool.json.JSONUtil;
-import com.karmai.blog.entity.mysql.Result;
+import com.karmai.blog.entity.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;

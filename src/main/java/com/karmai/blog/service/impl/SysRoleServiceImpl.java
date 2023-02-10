@@ -1,9 +1,9 @@
 package com.karmai.blog.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.karmai.blog.entity.mysql.SysRole;
+import com.karmai.blog.entity.SysRole;
 import com.karmai.blog.service.SysRoleService;
-import com.karmai.blog.mapper.mysql.SysRoleMapper;
+import com.karmai.blog.mapper.SysRoleMapper;
 import org.springframework.stereotype.Service;
 
 /**

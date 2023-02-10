@@ -1,4 +1,4 @@
-package com.karmai.blog.entity.mysql;
+package com.karmai.blog.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 
@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.karmai.blog.annotation.PhoneValid;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

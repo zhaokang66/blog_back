@@ -1,6 +1,6 @@
 package com.karmai.blog.utils;
 
-import com.karmai.blog.entity.mysql.SysUser;
+import com.karmai.blog.entity.SysUser;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**

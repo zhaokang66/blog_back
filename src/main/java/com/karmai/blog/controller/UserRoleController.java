@@ -1,9 +1,9 @@
 package com.karmai.blog.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.karmai.blog.entity.mysql.Result;
-import com.karmai.blog.entity.mysql.SysRole;
-import com.karmai.blog.entity.mysql.SysUserRole;
+import com.karmai.blog.entity.Result;
+import com.karmai.blog.entity.SysRole;
+import com.karmai.blog.entity.SysUserRole;
 import com.karmai.blog.service.SysRoleService;
 import com.karmai.blog.service.SysUserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class UserRoleController {
     @Transactional(rollbackFor = Exception.class)
     @PostMapping(value = "grantRole")
     @PreAuthorize("hasAuthority('system:user:role')")
-    public Result grantRole(Long userId, @RequestBody Long[] roleIds) {
+    public Result<?> grantRole(Long userId, @RequestBody Long[] roleIds) {
         // 此处应该加事务管理,默认事务失效的原因：1：类不是public2、数据库不支持事务3、异常没用抛出，被catch了4、异常类型，默认没指定rollbackFor的话，检查异常不触发回滚
         sysUserRoleService.remove(new QueryWrapper<SysUserRole>().eq("user_id",userId));
         List<SysUserRole> userRoleList = new ArrayList<>();

@@ -1,4 +1,4 @@
-package com.karmai.blog.entity.mysql;
+package com.karmai.blog.entity;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

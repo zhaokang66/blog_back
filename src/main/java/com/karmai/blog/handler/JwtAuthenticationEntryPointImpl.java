@@ -1,7 +1,7 @@
 package com.karmai.blog.handler;
 
 import cn.hutool.json.JSONUtil;
-import com.karmai.blog.entity.mysql.Result;
+import com.karmai.blog.entity.Result;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;

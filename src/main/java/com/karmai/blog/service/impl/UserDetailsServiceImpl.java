@@ -1,6 +1,6 @@
 package com.karmai.blog.service.impl;
 
-import com.karmai.blog.entity.mysql.SysUser;
+import com.karmai.blog.entity.SysUser;
 import com.karmai.blog.enums.StatusCodeEnum;
 import com.karmai.blog.exception.BizException;
 import com.karmai.blog.exception.UserCountLockException;

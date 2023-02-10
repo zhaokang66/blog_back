@@ -1,4 +1,4 @@
-package com.karmai.blog.entity.mysql;
+package com.karmai.blog.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;

@@ -1,6 +1,6 @@
 package com.karmai.blog.service;
 
-import com.karmai.blog.entity.mysql.SysMenu;
+import com.karmai.blog.entity.SysMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -13,4 +13,9 @@ import java.util.List;
 public interface SysMenuService extends IService<SysMenu> {
 
     List<SysMenu> buildTreeMenu(List<SysMenu> sysMenuList);
+
+
+    List<SysMenu> listMenu();
+
+    void deleteMenu(Integer menuId);
 }

@@ -1,4 +1,4 @@
-package com.karmai.blog.entity.mysql;
+package com.karmai.blog.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -65,4 +65,10 @@ public class SysMenu extends BaseEntity implements Serializable {
      */
     @TableField(value = "perms")
     private String perms;
+
+    /**
+     * 子级菜单
+     */
+    @TableField(exist = false)
+    private List<SysMenu> childMenu;
 }
