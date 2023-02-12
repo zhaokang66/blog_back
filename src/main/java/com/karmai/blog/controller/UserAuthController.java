@@ -65,7 +65,7 @@ public class  UserAuthController {
     public Result<List<SysUser>> searchUser(@RequestBody Map<String,Object> param) {
         if (param.containsKey("keyword")) {
             String keyword = param.get("keyword").toString();
-            List<SysUser> userList = sysUserService.list(new QueryWrapper<SysUser>().like("username",keyword).or().like("nickName","keyword"));
+            List<SysUser> userList = sysUserService.list(new QueryWrapper<SysUser>().like("username",keyword).or().like("nickName",keyword));
             return Result.ok(userList);
         }
         return Result.fail("请传入keyword字段");

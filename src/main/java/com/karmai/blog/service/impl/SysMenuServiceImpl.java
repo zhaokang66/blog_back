@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
 * @author karmai
@@ -26,6 +28,8 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
 
     @Autowired
     SysRoleMenuMapper sysRoleMenuMapper;
+    @Autowired
+    SysMenuMapper sysMenuMapper;
     @Override
     public List<SysMenu> buildTreeMenu(List<SysMenu> sysMenuList) {
         List<SysMenu> resultMenuList=new ArrayList<>();
@@ -46,7 +50,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
 
     @Override
     public List<SysMenu> listMenu() {
-        return null;
+        // 查出菜单列表 条件 menuType=M or C
+        List<SysMenu> sysMenuList = sysMenuMapper.selectList(new LambdaQueryWrapper<SysMenu>()
+                .eq(SysMenu::getMenuType, "M").
+                or()
+                .eq(SysMenu::getMenuType, "C")).stream().sorted(Comparator.comparing(SysMenu::getOrderNum)).collect(Collectors.toList());
+        return buildTreeMenu(sysMenuList);
     }
 
     @Override
