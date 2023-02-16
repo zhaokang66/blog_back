@@ -58,9 +58,8 @@ public class  UserAuthController {
     }
 
     /**
-     *  搜索用户，根据用户昵称或者用户名搜索 eslaticsearch
+     *  搜索用户，根据用户昵称或者用户名搜索
      */
-
     @PostMapping("searchUser")
     public Result<List<SysUser>> searchUser(@RequestBody Map<String,Object> param) {
         if (param.containsKey("keyword")) {

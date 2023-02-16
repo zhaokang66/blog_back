@@ -9,12 +9,15 @@ import com.karmai.blog.exception.BizException;
 import com.karmai.blog.mapper.SysRoleMenuMapper;
 import com.karmai.blog.service.SysMenuService;
 import com.karmai.blog.mapper.SysMenuMapper;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -30,6 +33,8 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
     SysRoleMenuMapper sysRoleMenuMapper;
     @Autowired
     SysMenuMapper sysMenuMapper;
+    @Autowired
+    RabbitTemplate rabbitTemplate;
     @Override
     public List<SysMenu> buildTreeMenu(List<SysMenu> sysMenuList) {
         List<SysMenu> resultMenuList=new ArrayList<>();
@@ -55,6 +60,8 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
                 .eq(SysMenu::getMenuType, "M").
                 or()
                 .eq(SysMenu::getMenuType, "C")).stream().sorted(Comparator.comparing(SysMenu::getOrderNum)).collect(Collectors.toList());
+        // 测试作为生产者向MQ发送消息
+        rabbitTemplate.convertAndSend("testExchange","test.routerKey",sysMenuList,new CorrelationData(System.currentTimeMillis() + "$" + UUID.randomUUID()));
         return buildTreeMenu(sysMenuList);
     }
 
