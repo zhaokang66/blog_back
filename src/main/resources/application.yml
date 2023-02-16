@@ -29,9 +29,9 @@ spring:
       connection-test-query: SELECT 1
   # redis配置
   redis:
-    host: 你的ip
+    host: 127.0.0.1
     port: 6379
-    password: Redis密码
+    password: 123456
   # mq配置
   rabbitmq:
     host: localhost
