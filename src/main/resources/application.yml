@@ -38,6 +38,7 @@ spring:
     port: 5672
     username: guest
     password: guest
+    pre
     listener:
       simple:
         retry:
@@ -45,6 +46,7 @@ spring:
           max-attempts: 3 #最大重试次数
           initial-interval: 3000 #重试间隔时间（单位毫秒）
         concurrency: 5 #最大并发数
+        acknowledge-mode: manual #消息签收的模式，默认是auto自动签收
   # es配置 若搜索模式为mysql可删除
   elasticsearch:
     rest:
