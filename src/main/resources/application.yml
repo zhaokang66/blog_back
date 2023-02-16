@@ -38,7 +38,6 @@ spring:
     port: 5672
     username: guest
     password: guest
-    pre
     listener:
       simple:
         retry:
@@ -54,8 +53,8 @@ spring:
   # 邮箱配置
   mail:
     host: smtp.qq.com
-    username: 邮箱用户名
-    password: 邮箱授权码
+    username: 942463600@qq.com
+    password: zzpugrchguznbcgc
     default-encoding: UTF-8
     port: 587
     properties:

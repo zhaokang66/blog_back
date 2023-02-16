@@ -1,5 +1,6 @@
 package com.karmai.blog.service.impl;
 
+import cn.hutool.json.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -12,6 +13,9 @@ import com.karmai.blog.mapper.SysMenuMapper;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,6 +39,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
     SysMenuMapper sysMenuMapper;
     @Autowired
     RabbitTemplate rabbitTemplate;
+
     @Override
     public List<SysMenu> buildTreeMenu(List<SysMenu> sysMenuList) {
         List<SysMenu> resultMenuList=new ArrayList<>();
