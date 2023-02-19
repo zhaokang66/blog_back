@@ -8,6 +8,8 @@ import java.util.List;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * 
  * @TableName sys_menu
@@ -18,6 +20,7 @@ public class SysMenu extends BaseEntity implements Serializable {
     /**
      * 菜单名称
      */
+    @NotBlank(message = "菜单名称不能为空")
     @TableField(value = "name")
     private String name;
 
@@ -42,6 +45,7 @@ public class SysMenu extends BaseEntity implements Serializable {
     /**
      * 路由地址
      */
+    @NotBlank(message = "路由地址不能为空")
     @TableField(value = "path")
     private String path;
 
@@ -51,6 +55,7 @@ public class SysMenu extends BaseEntity implements Serializable {
     /**
      * 组件路径
      */
+    @NotBlank(message = "组件路径不能为空")
     @TableField(value = "component")
     private String component;
 
