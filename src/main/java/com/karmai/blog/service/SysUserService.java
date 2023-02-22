@@ -15,4 +15,6 @@ public interface SysUserService extends IService<SysUser> {
     void register(SysUser user);
 
     String getUserAuthorityInfo(Long userId);
+
+    void sendEmailCode(String emailName);
 }

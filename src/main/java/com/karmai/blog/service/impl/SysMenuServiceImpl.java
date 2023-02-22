@@ -37,8 +37,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
     SysRoleMenuMapper sysRoleMenuMapper;
     @Autowired
     SysMenuMapper sysMenuMapper;
-    @Autowired
-    RabbitTemplate rabbitTemplate;
+
 
     @Override
     public List<SysMenu> buildTreeMenu(List<SysMenu> sysMenuList) {
@@ -65,8 +64,6 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
                 .eq(SysMenu::getMenuType, "M").
                 or()
                 .eq(SysMenu::getMenuType, "C")).stream().sorted(Comparator.comparing(SysMenu::getOrderNum)).collect(Collectors.toList());
-        // 测试作为生产者向MQ发送消息
-        rabbitTemplate.convertAndSend("testExchange","test.routerKey",sysMenuList,new CorrelationData(System.currentTimeMillis() + "$" + UUID.randomUUID()));
         return buildTreeMenu(sysMenuList);
     }
 

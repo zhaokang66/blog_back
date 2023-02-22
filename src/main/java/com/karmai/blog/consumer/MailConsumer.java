@@ -4,15 +4,16 @@ import com.karmai.blog.dto.EmailDTO;
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.amqp.support.AmqpHeaders;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import javax.mail.internet.MimeMessage;
 import java.util.Map;
 
 /**
@@ -43,11 +44,23 @@ public class MailConsumer {
     )
     @RabbitHandler
     public void send(@Payload EmailDTO emailDTO, @Headers Map<String ,Object> headers, Channel channel) throws Exception{
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(from);
-        message.setTo(emailDTO.getTo());
-        message.setSubject(emailDTO.getSubject());
-        message.setText(emailDTO.getText());
+        // 普通邮件
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setFrom(from);
+//        message.setTo(emailDTO.getTo());
+//        message.setSubject(emailDTO.getSubject());
+//        message.setText(emailDTO.getText());
+//        javaMailSender.send(message);
+//        Long deliverTag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
+//        channel.basicAck(deliverTag,false);// 第二个参数代表是否支持批量签收
+
+        // html邮件
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message,true);
+        helper.setFrom(from);
+        helper.setTo(emailDTO.getTo());
+        helper.setSubject(emailDTO.getSubject());
+        helper.setText(emailDTO.getText());
         javaMailSender.send(message);
         Long deliverTag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
         channel.basicAck(deliverTag,false);// 第二个参数代表是否支持批量签收

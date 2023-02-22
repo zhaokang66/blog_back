@@ -70,4 +70,14 @@ public class  UserAuthController {
         return Result.fail("请传入keyword字段");
     }
 
+    /**
+     * 邮箱发送验证码
+     */
+    @GetMapping("sendEmailCode")
+    public Result<?> sendEmailCode(String emailName) {
+        sysUserService.sendEmailCode(emailName);
+        return Result.ok();
+    }
+
+
 }
