@@ -1,6 +1,7 @@
 package com.karmai.blog.consumer;
 
 import com.karmai.blog.dto.EmailDTO;
+import com.karmai.blog.utils.CommonUtils;
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.amqp.support.AmqpHeaders;
@@ -60,9 +61,11 @@ public class MailConsumer {
         helper.setFrom(from);
         helper.setTo(emailDTO.getTo());
         helper.setSubject(emailDTO.getSubject());
-        helper.setText(emailDTO.getText());
+        helper.setText(CommonUtils.buildContent(emailDTO.getText()),true);
         javaMailSender.send(message);
         Long deliverTag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
         channel.basicAck(deliverTag,false);// 第二个参数代表是否支持批量签收
+
+
     }
 }

@@ -104,12 +104,10 @@ public class SysSysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
         EmailDTO emailDTO = new EmailDTO();
         emailDTO.setTo(emailName);
         emailDTO.setSubject("邮箱验证码");
-        String text = "<html><head>\n" +
-                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"></head><body><b>您的邮箱验证码为:<b>" +  code + "</b>,验证码有效期为<span style=\"color:red;\">15分钟</span>，请尽快验证</body></html>";
-        emailDTO.setText(text);
+        emailDTO.setText(code);
         rabbitTemplate.convertAndSend("mainExchange","mainRouterKey",emailDTO,new CorrelationData(System.currentTimeMillis() + "$" + UUID.randomUUID()));
         // 验证码存入redis设置缓存15分组 根据邮箱地址设置key
-        redisUtils.set("email:code:" + emailName,code,15 * 60);
+        redisUtils.set("email:code:" + emailName,code,30 * 60);
     }
 
     private Boolean checkUser(SysUser user) {

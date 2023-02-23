@@ -6,6 +6,8 @@ server:
       timeout: 21600
 # 配置mysql数据库
 spring:
+  main:
+    allow-circular-references: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
