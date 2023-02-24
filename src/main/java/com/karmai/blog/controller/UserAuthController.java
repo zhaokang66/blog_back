@@ -1,11 +1,10 @@
 package com.karmai.blog.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.karmai.blog.dto.VaildEmailDto;
 import com.karmai.blog.entity.Result;
 import com.karmai.blog.entity.SysUser;
 import com.karmai.blog.service.SysUserService;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -79,5 +78,13 @@ public class  UserAuthController {
         return Result.ok();
     }
 
+    /**
+     *  验证邮箱
+     */
+    @PostMapping("validEmail")
+    public Result<?> validEmail(@RequestBody VaildEmailDto data) {
+        sysUserService.validEmail(data);
+        return Result.ok();
+    }
 
 }

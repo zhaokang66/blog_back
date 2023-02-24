@@ -1,12 +1,11 @@
 package com.karmai.blog.consumer;
 
-import com.karmai.blog.dto.EmailDTO;
+import com.karmai.blog.dto.EmailDto;
 import com.karmai.blog.utils.CommonUtils;
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.messaging.handler.annotation.Headers;
@@ -44,7 +43,7 @@ public class MailConsumer {
             )
     )
     @RabbitHandler
-    public void send(@Payload EmailDTO emailDTO, @Headers Map<String ,Object> headers, Channel channel) throws Exception{
+    public void send(@Payload EmailDto emailDTO, @Headers Map<String ,Object> headers, Channel channel) throws Exception{
         // 普通邮件
 //        SimpleMailMessage message = new SimpleMailMessage();
 //        message.setFrom(from);

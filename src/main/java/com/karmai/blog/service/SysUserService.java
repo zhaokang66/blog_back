@@ -1,5 +1,6 @@
 package com.karmai.blog.service;
 
+import com.karmai.blog.dto.VaildEmailDto;
 import com.karmai.blog.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -17,4 +18,6 @@ public interface SysUserService extends IService<SysUser> {
     String getUserAuthorityInfo(Long userId);
 
     void sendEmailCode(String emailName);
+
+    void validEmail(VaildEmailDto data);
 }

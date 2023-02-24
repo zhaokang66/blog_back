@@ -1,10 +1,10 @@
 package com.karmai.blog.service.impl;
 
-import cn.hutool.extra.mail.MailUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.karmai.blog.dto.EmailDTO;
+import com.karmai.blog.dto.EmailDto;
+import com.karmai.blog.dto.VaildEmailDto;
 import com.karmai.blog.entity.SysMenu;
 import com.karmai.blog.entity.SysRole;
 import com.karmai.blog.entity.SysUser;
@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -101,13 +102,28 @@ public class SysSysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
         // 生成6位随机数
         String code = CommonUtils.genRandomCode();
         // 发送邮件
-        EmailDTO emailDTO = new EmailDTO();
+        EmailDto emailDTO = new EmailDto();
         emailDTO.setTo(emailName);
         emailDTO.setSubject("邮箱验证码");
         emailDTO.setText(code);
         rabbitTemplate.convertAndSend("mainExchange","mainRouterKey",emailDTO,new CorrelationData(System.currentTimeMillis() + "$" + UUID.randomUUID()));
-        // 验证码存入redis设置缓存15分组 根据邮箱地址设置key
+        // 验证码存入redis设置缓存30分钟 根据邮箱地址设置key
         redisUtils.set("email:code:" + emailName,code,30 * 60);
+    }
+
+    @Override
+    public void validEmail(VaildEmailDto data) {
+        Object redisCode = redisUtils.get("email:code:" + data.getEmailName());
+        if (ObjectUtils.isEmpty(redisCode)) {
+            throw new BizException("验证码已过期!");
+        }
+        if (!data.getCode().equals(redisCode.toString())) {
+            throw new BizException("验证码无效，请重新输入!");
+        }
+        // TODO: 2023/2/24  修改用户邮箱状态
+        // 删除redis缓存
+        redisUtils.del("email:code:" + data.getEmailName());
+
     }
 
     private Boolean checkUser(SysUser user) {
