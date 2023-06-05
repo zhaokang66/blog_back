@@ -4,6 +4,8 @@ import com.karmai.blog.dto.VaildEmailDto;
 import com.karmai.blog.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
 * @author karmai
 * @description 针对表【user】的数据库操作Service
@@ -20,4 +22,6 @@ public interface SysUserService extends IService<SysUser> {
     void sendEmailCode(String emailName);
 
     void validEmail(VaildEmailDto data);
+
+    List<SysUser> getUserByPage(int page, int pageSize);
 }

@@ -19,7 +19,7 @@ import java.util.Map;
  * @Date 2022/11/15 12:58
  */
 @RestController
-@RequestMapping("user")
+@RequestMapping("/admin/user")
 public class  UserAuthController {
 
     @Autowired

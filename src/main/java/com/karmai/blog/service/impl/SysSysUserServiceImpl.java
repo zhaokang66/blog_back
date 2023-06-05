@@ -2,6 +2,7 @@ package com.karmai.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.karmai.blog.dto.EmailDto;
 import com.karmai.blog.dto.VaildEmailDto;
@@ -124,6 +125,13 @@ public class SysSysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
         // 删除redis缓存
         redisUtils.del("email:code:" + data.getEmailName());
 
+    }
+
+    @Override
+    public List<SysUser> getUserByPage(int page, int pageSize) {
+        Page<SysUser> pageEntity = new Page<>(page,pageSize);
+//        sysUserMapper.selectPage(pageEntity,new QueryWrapper<SysUser>().);
+        return null;
     }
 
     private Boolean checkUser(SysUser user) {
